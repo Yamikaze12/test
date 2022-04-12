@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- test.session tree view -->
+    <record id="test_session_view_tree" model="ir.ui.view">
+        <field name="name">Session</field>
+        <field name="model">test.session</field>
+        <field name="arch" type="xml">
+            <tree string="Session" colors="red: taken_seats &gt; 75; green: taken_seats &lt; 25">
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="course_id"/>
+                <field name="is_instrukturnya"/>
+                <field name="attendee_ids"/>
+                <field name="start_date"/>
+                <field name="duration"/>
+                <field name="seats"/>
+                <field name="taken_seats" widget="progressbar"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- test.session form view -->
+    <record id="test_session_view_form" model="ir.ui.view">
+        <field name="name">Session</field>
+        <field name="model">test.session</field>
+        <field name="arch" type="xml">
+            <form string="Session form">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="name" class="oe_edit_only" string="Session Name"/>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <!-- Add your fields here -->
+                        <group>
+                                <field name="course_id"/>
+                                <field name="is_instrukturnya"/>
+                                <field name="start_date"/>
+                        </group>
+                        <group>
+                                <field name="duration"/>
+                                <field name="seats"/>
+                                <field name="taken_seats" widget="progressbar"/>
+                                <field name="active"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Attendee">
+                            <group>
+                                <field name="attendee_ids"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- test.session calendar view -->
+    <record id="test_session_view_calendar" model="ir.ui.view">
+        <field name="name">test.session.view.calendar</field>
+        <field name="model">test.session</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendar" date_start="start_date" color="course_id">
+                <!-- Add your fields here -->
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- test.session search view -->
+    <record id="test_session_view_search" model="ir.ui.view">
+        <field name="name">test.session.view.search</field>
+        <field name="model">test.session</field>
+        <field name="arch" type="xml">
+            <search string="Session">
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="is_instrukturnya"/>
+                
+                <filter string="Non Zero Duration"
+                    domain="[('duration','&gt;',0)]" />
+                
+                <filter string="Course"
+                    domain="[]"
+                    context="{'group_by':'course_id'}"/>
+                
+            </search>
+        </field>
+    </record>
+
+    <!-- test.session action window -->
+    <record id="test_session_action" model="ir.actions.act_window">
+        <field name="name">Session</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">test.session</field>
+        <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem 
+        id="_accademik_session_menu_act" 
+        name="Session" 
+        parent="accademik_menu_categ" 
+        action="test_session_action" 
+        sequence="20"/>
+
+</odoo>

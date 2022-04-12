@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_test_course,access.test.course,model_test_course,,1,1,1,1
+access_test_session,access.test.session,model_test_session,,1,1,1,1
+access_test_attendee,access.test.attendee,model_test_attendee,,1,1,1,1
